@@ -41,9 +41,9 @@ p = ProDj()
 p.cl.log_played_tracks = True
 p.cl.auto_request_beatgrid = False
 
-#bpm = 128 # default bpm until reported from player
-#beat = 0
-#c.setBpm(bpm)
+bpm = 128 # default bpm until reported from player
+beat = 0
+c.setBpm(bpm)
 
 def update_master(player_number):
   global bpm, beat, p

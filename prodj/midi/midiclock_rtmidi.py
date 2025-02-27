@@ -14,7 +14,7 @@ class MidiClock(Thread):
     self.keep_running = True
     self.delay = 1
     self.calibration_cycles = 60
-    self.midiout = rtmidi.RtMidiOut()
+    self.midiout = rtmidi.MidiOut()
 
   def open(self, preferred_name=None, preferred_port=0):
     available_ports = self.midiout.get_ports()
