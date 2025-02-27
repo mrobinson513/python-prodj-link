@@ -22,7 +22,10 @@ args = parser.parse_args()
 
 logging.basicConfig(level=args.loglevel, format='%(levelname)s: %(message)s')
 
-from prodj.midi.midiclock_rtmidi import MidiClock
+if args.rtmidi:
+  from prodj.midi.midiclock_rtmidi import MidiClock
+else
+  from prodj.midi.midiclock_alsaseq import MidiClock
 
 c = MidiClock()
 
