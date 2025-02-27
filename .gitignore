@@ -3,3 +3,6 @@ stuff
 .idea/
 databases/
 tracks.log
+bin/
+lib/
+include/

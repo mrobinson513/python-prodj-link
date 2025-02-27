@@ -5,6 +5,7 @@ import sys
 import argparse
 
 from prodj.core.prodj import ProDj
+from prodj.midi.midiclock_rtmidi import MidiClock
 
 parser = argparse.ArgumentParser(description='Python ProDJ Link Midi Clock')
 notes_group = parser.add_mutually_exclusive_group()
@@ -21,10 +22,7 @@ args = parser.parse_args()
 
 logging.basicConfig(level=args.loglevel, format='%(levelname)s: %(message)s')
 
-if args.rtmidi:
-  from prodj.midi.midiclock_rtmidi import MidiClock
-else:
-  from prodj.midi.midiclock_alsaseq import MidiClock
+from prodj.midi.midiclock_rtmidi import MidiClock
 
 c = MidiClock()
 

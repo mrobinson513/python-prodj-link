@@ -65,4 +65,5 @@ def dump_status_packet(packet):
 
 def dump_packet_raw(data):
   # warning level to get message in case of decoding errors
-  logging.warning(" ".join("{:02x}".format(b) for b in data))
+  print(" ".join("{:02x}".format(b) for b in data)[41:63])
+  print("\n")

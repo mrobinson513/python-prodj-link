@@ -98,6 +98,7 @@ class ProDj(Thread):
     #logging.debug("Broadcast keepalive packet from {}".format(addr))
     try:
       packet = packets.KeepAlivePacket.parse(data)
+      packets_dump.dump_packet_raw(data)
     except Exception as e:
       logging.warning("Failed to parse keepalive packet from {}, {} bytes: {}".format(addr, len(data), e))
       packets_dump.dump_packet_raw(data)
@@ -116,6 +117,7 @@ class ProDj(Thread):
     #logging.debug("Broadcast beat packet from {}".format(addr))
     try:
       packet = packets.BeatPacket.parse(data)
+      packets_dump.dump_packet_raw(data)
     except Exception as e:
       logging.warning("Failed to parse beat packet from {}, {} bytes: {}".format(addr, len(data), e))
       packets_dump.dump_packet_raw(data)
@@ -128,6 +130,7 @@ class ProDj(Thread):
     #logging.debug("Broadcast status packet from {}".format(addr))
     try:
       packet = packets.StatusPacket.parse(data)
+      packets_dump.dump_packet_raw(data)
     except Exception as e:
       logging.warning("Failed to parse status packet from {}, {} bytes: {}".format(addr, len(data), e))
       packets_dump.dump_packet_raw(data)
