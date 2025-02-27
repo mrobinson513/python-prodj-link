@@ -24,7 +24,7 @@ logging.basicConfig(level=args.loglevel, format='%(levelname)s: %(message)s')
 
 if args.rtmidi:
   from prodj.midi.midiclock_rtmidi import MidiClock
-else
+else:
   from prodj.midi.midiclock_alsaseq import MidiClock
 
 c = MidiClock()
