@@ -48,6 +48,7 @@ c.setBpm(bpm)
 def update_master(player_number):
   global bpm, beat, p
   client = p.cl.getClient(player_number)
+  print(client.state)
   if client is None or not 'master' in client.state:
     return
   if (args.notes or args.single_notes) and beat != client.beat:
