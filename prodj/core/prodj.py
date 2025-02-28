@@ -142,7 +142,7 @@ class ProDj(Thread):
   # arguments of cb: this clientlist object, player number of changed client
   def set_client_keepalive_callback(self, cb=None):
     self.cl.client_keepalive_callback = cb
-
+  
   # called whenever a status update of a known client is received
   # arguments of cb: this clientlist object, player number of changed client
   def set_client_change_callback(self, cb=None):
