@@ -57,6 +57,7 @@ def update_master(player_number):
   #    note += client.beat
   #  c.send_note(note)
   newbpm = client.bpm*client.actual_pitch
+  print(newbpm)
   if bpm != newbpm:
     c.setBpm(newbpm)
     bpm = newbpm
