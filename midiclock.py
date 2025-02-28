@@ -51,11 +51,11 @@ def update_master(player_number):
   #print(player_number, client.play_state)
   if client is None or not 'playing' in client.play_state:
     return
-  if (args.notes or args.single_notes) and beat != client.beat:
-    note = args.base_note
-    if args.notes:
-      note += client.beat
-    c.send_note(note)
+  #if (args.notes or args.single_notes) and beat != client.beat:
+  #  note = args.base_note
+  #  if args.notes:
+  #    note += client.beat
+  #  c.send_note(note)
   newbpm = client.bpm*client.actual_pitch
   if bpm != newbpm:
     c.setBpm(newbpm)
