@@ -18,11 +18,9 @@ def get_live_track_id():
   try:
     decks,data = p.cl.clients,{"track_data": None}
     decks_playing = sum(1 for d in decks if d.play_state == "playing")
-    print(decks_playing)
     
     if decks_playing == 1:
       for d in decks:
-        print(d.play_state)
         if d.play_state == "playing":
           md = d.metadata
           data["track_data"] = {
