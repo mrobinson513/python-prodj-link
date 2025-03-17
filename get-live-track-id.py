@@ -32,8 +32,11 @@ def get_live_track_id():
             "title": md["title"]
           }
     logging.info(data)
-    resp = requests.post(url=f"http://{ENDPOINT_HOST}:{ENDPOINT_PORT}/update", data=json.dumps(data))
-    return json.dumps(data)
+    try:
+      resp = requests.post(url=f"http://{ENDPOINT_HOST}:{ENDPOINT_PORT}/update", data=json.dumps(data))
+      return json.dumps(data)
+    except ConnectionError:
+      logging.warn("The endpoint is unreachable but don't let that stop you")
   except:
     raise
 
