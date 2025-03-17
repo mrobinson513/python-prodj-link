@@ -32,7 +32,7 @@ def get_live_track_id():
             "title": md["title"]
           }
     logging.info(data)
-    resp = requests.post(url=f"http://{ENDPOINT_HOST}:{ENDPOINT_PORT}/update", data=data)
+    resp = requests.post(url=f"http://{ENDPOINT_HOST}:{ENDPOINT_PORT}/update", data=json.dumps(data))
     return json.dumps(data)
   except:
     logging.warn("It is not clear which deck is live, no data will be sent")
