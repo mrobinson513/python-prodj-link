@@ -29,13 +29,10 @@ def get_live_track_id():
             "artist": md["artist"],
             "title": md["title"]
           }
-    else:
-      data["live"] = "no decks playing or none found"
     logging.info(data)
     return json.dumps(data)
   except:
-    logging.error("yeah something happened...")
-    raise
+    logging.warn("No valid data yet...")
 
 # update_clients(client_win)
 
