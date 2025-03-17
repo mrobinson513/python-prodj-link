@@ -38,7 +38,7 @@ def get_live_track_id():
     except ConnectionError:
       logging.warn("The endpoint is unreachable but don't let that stop you")
   except:
-    raise
+    logging.error("Something is wrong, check other log messages")
 
 # update_clients(client_win)
 
