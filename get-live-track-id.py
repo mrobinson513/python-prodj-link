@@ -23,15 +23,21 @@ def get_live_track_id():
     decks,data = p.cl.clients,{"track_data": None}
     decks_playing = sum(1 for d in decks if d.play_state == "playing")
     
-    if decks_playing == 1:
-      for d in decks:
-        if d.play_state == "playing":
-          md = d.metadata
-          data["track_data"] = {
-            "artist": md["artist"],
-            "title": md["title"]
-          }
-    logging.info(data)
+    if decks_playing > 0:
+      if decks_playing == 1:
+        for d in decks:
+          if d.play_state == "playing":
+            md = d.metadata
+            data["track_data"] = {
+              "artist": md["artist"],
+              "title": md["title"]
+            }
+      logging.info(data)
+    else:
+      data["track_data"] = {
+        "artist": "",
+        "title": "No track presently playing"
+      }
     try:
       resp = requests.post(url=f"http://{ENDPOINT_HOST}:{ENDPOINT_PORT}/update", data=json.dumps(data))
       return json.dumps(data)
