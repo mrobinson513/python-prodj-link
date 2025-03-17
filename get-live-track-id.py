@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import curses, logging, socket, json
+import curses, logging, socket, json, os
 
 import requests
 from prodj.core.prodj import ProDj
@@ -9,6 +9,10 @@ import prodj.network.packets_dump as pdump
 # init logging
 default_loglevel=logging.INFO
 logging.basicConfig(level=default_loglevel)
+
+# init vars
+ENDPOINT_HOST=os.getenv("ENDPOINT_URL", "192.168.1.5")
+ENDPOINT_PORT=os.getenv("ENDPOINT_PORT", "8080")
 
 p = ProDj()
 p.set_client_keepalive_callback(lambda n: get_live_track_id())
@@ -28,9 +32,10 @@ def get_live_track_id():
             "title": md["title"]
           }
     logging.info(data)
+    resp = requests.post(url=f"http://{ENDPOINT_HOST}:{ENDPOINT_PORT}/update", data=data)
     return json.dumps(data)
   except:
-    logging.warn("No valid data yet...")
+    logging.warn("It is not clear which deck is live, no data will be sent")
 
 # update_clients(client_win)
 
