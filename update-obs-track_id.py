@@ -40,7 +40,7 @@ def update(input_name="track_id"):
         }
       ))
       return "Track data received"
-    except KeyError:
+    except:
       error_message = """Proper track data not found. Should be a JSON object containing: 
         {'track_data': {
           'artist': 'artist_name',
