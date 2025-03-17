@@ -48,7 +48,7 @@ def update(input_name="track_id"):
           'artist': 'artist_name',
           'title': 'track_title'}
         }"""
-      logging.error(error_message)
+      logging.error(f"payload received: {request.get_json(force=True)}")
       return error_message
 
 if __name__ == "__main__":
