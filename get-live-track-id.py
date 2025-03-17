@@ -35,7 +35,7 @@ def get_live_track_id():
     resp = requests.post(url=f"http://{ENDPOINT_HOST}:{ENDPOINT_PORT}/update", data=json.dumps(data))
     return json.dumps(data)
   except:
-    logging.warn("It is not clear which deck is live, no data will be sent")
+    raise
 
 # update_clients(client_win)
 

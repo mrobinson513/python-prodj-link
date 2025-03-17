@@ -29,17 +29,19 @@ def update(input_name="track_id"):
   if request.method == 'POST':
     try:
       track_data = request.get_json(force=True)['track_data']
-      artist = track_data['artist']
-      title = track_data['title']
-
-      track_string = f"{artist} - {title}"
-      obs.call(actions.SetInputSettings(
-        inputName=input_name,
-        inputSettings={
-          "text": track_string
-        }
-      ))
-      return "Track data received"
+      try:
+        artist = track_data['artist']
+        title = track_data['title']
+        track_string = f"{artist} - {title}"
+        obs.call(actions.SetInputSettings(
+          inputName=input_name,
+          inputSettings={
+            "text": track_string
+          }
+        ))
+        return "Track data received"
+      except KeyError:
+        logging.warn("Payload did not contain expected keys, not going to update")
     except:
       error_message = """Proper track data not found. Should be a JSON object containing: 
         {'track_data': {
@@ -47,7 +49,7 @@ def update(input_name="track_id"):
           'title': 'track_title'}
         }"""
       logging.error(error_message)
-      return error_message + "\n" + request.form
+      return error_message
 
 if __name__ == "__main__":
   app.run(host="0.0.0.0",port=8080)
