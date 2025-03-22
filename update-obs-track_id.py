@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import json,time
+import json,time,os
 import logging
 
 from obswebsocket import obsws, requests as actions
@@ -9,7 +9,10 @@ from flask import Flask, render_template, redirect, session, request
 default_loglevel=logging.DEBUG
 logging.basicConfig(level=default_loglevel)
 
-obs = obsws("localhost", 4455, "")
+OBS_WEBSOCKET_HOST=os.getenv("OBS_WEBSOCKET_HOST", "localhost")
+OBS_WEBSOCKET_PORT=os.getenv("OBS_WEBSOCKET_PORT", "4455")
+
+obs = obsws(OBS_WEBSOCKET_HOST, 4455, "")
 logging.info("Connecting to OBS WebSocket...")
 obs.connect()
 logging.info("Verifying...")
