@@ -6,9 +6,6 @@ import requests
 from prodj.core.prodj import ProDj
 import prodj.network.packets_dump as pdump
 
-# this only works on linux/RPi
-# from prodj.midi.midiclock_alsaseq import MidiClock
-
 # init logging
 default_loglevel=logging.INFO
 logging.basicConfig(level=default_loglevel)
@@ -17,13 +14,19 @@ logging.basicConfig(level=default_loglevel)
 ENDPOINT_HOST=os.getenv("ENDPOINT_URL", "localhost")
 ENDPOINT_PORT=os.getenv("ENDPOINT_PORT", "8080")
 
-# c = MidiClock()
-# c.open
-# 
-# bpm = 128 # default bpm until reported from player
-# beat = 0
-# 
-# c.setBpm(bpm)
+which_os = os.uname().sysname
+
+# this only works on linux/RPi
+if which_os == "Linux":
+  from prodj.midi.midiclock_alsaseq import MidiClock
+
+  c = MidiClock()
+  c.open
+
+  bpm = 128 # default bpm until reported from player
+  beat = 0
+
+  c.setBpm(bpm)
 
 p = ProDj()
 p.set_client_keepalive_callback(lambda n: get_live_track_id())
@@ -44,7 +47,12 @@ def get_live_track_id():
               "artist": str(md["artist"]),
               "title": str(md["title"])
             }
-            logging.info(f"track BPM: {client.bpm*client.actual_pitch}")      
+            newbpm = client.bpm*client.actual_pitch
+            logging.info(f"track BPM: {newbpm}")
+            if which_os == "Linux":
+                if bpm != newbpm:
+                  c.setBpm(newbpm)
+                  bpm = newbpm
       logging.info(data)
     else:
       data["track_data"] = {
