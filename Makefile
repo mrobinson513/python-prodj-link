@@ -1,8 +1,8 @@
 tempo:
 	python midiclock.py -d "Elektron Syntakt"
 
-update_obs:
+obs:
 	python update-obs-track_id.py &
 
-get_track_id:
+track:
 	python get-live-track-id.py
