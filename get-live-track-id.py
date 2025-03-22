@@ -29,15 +29,15 @@ p = ProDj()
 p.set_client_keepalive_callback(lambda n: get_live_track_id())
 p.set_client_change_callback(lambda n: get_live_track_id())
 
-def get_live_track_id(player_number):
+def get_live_track_id():
   try:
     decks,data = p.cl.clients,{"track_data": None}
-    client=p.cl.getClient(player_number)
     decks_playing = sum(1 for d in decks if d.play_state == "playing")
     
     if decks_playing > 0:
       if decks_playing == 1:
         for d in decks:
+          client=p.cl.getClient(d.player_number)
           if d.play_state == "playing":
             md = d.metadata
             data["track_data"] = {
