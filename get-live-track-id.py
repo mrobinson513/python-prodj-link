@@ -13,6 +13,7 @@ logging.basicConfig(level=default_loglevel)
 # init vars
 ENDPOINT_HOST=os.getenv("ENDPOINT_URL", "localhost")
 ENDPOINT_PORT=os.getenv("ENDPOINT_PORT", "8080")
+MIDI_DEVICE_NAME=os.getenv("MIDI_DEVICE_NAME", "Elektron Syntakt")
 
 which_os = os.uname().sysname
 
@@ -21,7 +22,7 @@ if which_os == "Linux":
   from prodj.midi.midiclock_alsaseq import MidiClock
 
   c = MidiClock()
-  c.open
+  c.open(MIDI_DEVICE_NAME)
 
   bpm = 128 # default bpm until reported from player
   beat = 0
