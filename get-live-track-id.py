@@ -22,7 +22,7 @@ if which_os == "Linux":
   from prodj.midi.midiclock_alsaseq import MidiClock
 
   c = MidiClock()
-  c.open(MIDI_DEVICE_NAME)
+  c.open(MIDI_DEVICE_NAME,0)
 
   bpm = 128 # default bpm until reported from player
   beat = 0
