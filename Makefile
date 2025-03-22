@@ -1,5 +1,5 @@
 tempo:
- python midiclock.py -d "Elektron Syntakt"
+	python midiclock.py -d "Elektron Syntakt"
 
 update_obs:
 	python update-obs-track_id.py &
