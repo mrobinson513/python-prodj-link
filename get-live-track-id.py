@@ -52,9 +52,7 @@ def get_live_track_id():
             newbpm = client.bpm*client.actual_pitch
             logging.info(f"track BPM: {newbpm}")
             if which_os == "Linux":
-                if bpm != newbpm:
-                  c.setBpm(newbpm)
-                  bpm = newbpm
+              c.setBpm(newbpm)
       logging.info(data)
     else:
       data["track_data"] = {
