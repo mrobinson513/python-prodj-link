@@ -34,7 +34,7 @@ p.set_client_keepalive_callback(lambda n: get_live_track_id())
 p.set_client_change_callback(lambda n: get_live_track_id())
 
 def get_live_track_id():
-  global bpm, beat, p
+  global bpm, beat, p, c
   try:
     decks,data = p.cl.clients,{"track_data": None}
     decks_playing = sum(1 for d in decks if d.play_state == "playing")
@@ -50,9 +50,9 @@ def get_live_track_id():
               "title": str(md["title"])
             }
             newbpm = client.bpm*client.actual_pitch
-            logging.info(f"track BPM: {newbpm}")
             if which_os == "Linux":
               c.setBpm(newbpm)
+              logging.info(f"track BPM: {newbpm}")
       logging.info(data)
     else:
       data["track_data"] = {
