@@ -44,7 +44,7 @@ def get_live_track_id():
               "artist": str(md["artist"]),
               "title": str(md["title"])
             }
-      logging.info(f"track BPM: {client.bpm*client.actual_pitch}")
+            logging.info(f"track BPM: {client.bpm*client.actual_pitch}")      
       logging.info(data)
     else:
       data["track_data"] = {
