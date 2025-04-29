@@ -5,6 +5,7 @@ import sys
 import argparse
 
 from prodj.core.prodj import ProDj
+from prodj.midi.midiclock_rtmidi import MidiClock
 
 parser = argparse.ArgumentParser(description='Python ProDJ Link Midi Clock')
 notes_group = parser.add_mutually_exclusive_group()
@@ -37,7 +38,7 @@ if args.list_ports:
 c.open(args.device, args.port)
 
 p = ProDj()
-p.cl.log_played_tracks = False
+p.cl.log_played_tracks = True
 p.cl.auto_request_beatgrid = False
 
 bpm = 128 # default bpm until reported from player
@@ -47,14 +48,16 @@ c.setBpm(bpm)
 def update_master(player_number):
   global bpm, beat, p
   client = p.cl.getClient(player_number)
-  if client is None or not 'master' in client.state:
+  #print(player_number, client.play_state)
+  if client is None or not 'playing' in client.play_state:
     return
-  if (args.notes or args.single_notes) and beat != client.beat:
-    note = args.base_note
-    if args.notes:
-      note += client.beat
-    c.send_note(note)
+  #if (args.notes or args.single_notes) and beat != client.beat:
+  #  note = args.base_note
+  #  if args.notes:
+  #    note += client.beat
+  #  c.send_note(note)
   newbpm = client.bpm*client.actual_pitch
+  print(newbpm)
   if bpm != newbpm:
     c.setBpm(newbpm)
     bpm = newbpm

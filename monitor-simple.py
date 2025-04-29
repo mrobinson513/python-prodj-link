@@ -15,7 +15,6 @@ logging.basicConfig(level=default_loglevel, format='%(levelname)s: %(message)s')
 p = ProDj()
 
 def print_clients(player_number):
-  return
   for c in p.cl.clients:
     if c.player_number == player_number:
       logging.info("Player {}: {} {} BPM Pitch {:.2f}% ({:.2f}%) Beat {} Beatcnt {} pos {:.6f}".format(

@@ -2,9 +2,11 @@
 
 import curses
 import logging
+import socket
 
 from prodj.core.prodj import ProDj
 from prodj.curses.loghandler import CursesHandler
+import prodj.network.packets_dump as pdump
 
 #default_loglevel=logging.DEBUG
 default_loglevel=logging.INFO
@@ -19,9 +21,9 @@ win.hline(17,0,"-",curses.COLS)
 win.refresh()
 
 # init logging
-ch = CursesHandler(log_win)
-ch.setFormatter(logging.Formatter(fmt='%(levelname)s: %(message)s'))
-logging.basicConfig(level=default_loglevel, handlers=[ch])
+#ch = CursesHandler(log_win)
+#ch.setFormatter(logging.Formatter(fmt='%(levelname)s: %(message)s'))
+#logging.basicConfig(level=default_loglevel, handlers=[ch])
 
 p = ProDj()
 p.set_client_keepalive_callback(lambda n: update_clients(client_win))
