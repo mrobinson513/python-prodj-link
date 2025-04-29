@@ -18,24 +18,26 @@ parser.add_argument('-q', '--quiet', action='store_const', dest='loglevel', cons
 parser.add_argument('-D', '--debug', action='store_const', dest='loglevel', const=logging.DEBUG, help='Display verbose debugging information')
 parser.add_argument('--note-base', type=int, default=60, help='Note value for first beat')
 parser.add_argument('--rtmidi', action='store_true', help='Use deprecated rtmidi backend with timing issues')
+parser.add_argument('--mido', action='store_true', help='Use MIDO backend')
 args = parser.parse_args()
 
 logging.basicConfig(level=args.loglevel, format='%(levelname)s: %(message)s')
 
 if args.rtmidi:
   from prodj.midi.midiclock_rtmidi import MidiClock
+elif args.mido:
+  from prodj.midi.midiclock_mido import MidiClock
 else:
   from prodj.midi.midiclock_alsaseq import MidiClock
 
 c = MidiClock()
 
 if args.list_ports:
-  for id, name, ports in c.iter_alsa_seq_clients():
-    logging.info("MIDI device %d: %s, ports: %s",
-      id, name, ', '.join([str(x) for x in ports]))
+  for name in c.iter_midi_clients():
+    logging.info(name)
   sys.exit(0)
 
-c.open(args.device, args.port)
+c.open(args.device)
 
 p = ProDj()
 p.cl.log_played_tracks = True
@@ -59,7 +61,7 @@ def update_master(player_number):
   newbpm = client.bpm*client.actual_pitch
   print(newbpm)
   if bpm != newbpm:
-    c.setBpm(newbpm)
+    c.set_bpm(newbpm)
     bpm = newbpm
 
 p.set_client_change_callback(update_master)

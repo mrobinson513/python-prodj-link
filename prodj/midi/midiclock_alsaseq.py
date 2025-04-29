@@ -23,7 +23,7 @@ class MidiClock(Thread):
     alsaseq.client('MidiClock', 0, 1, True)
 
   # this may only be called after creating this object
-  def iter_alsa_seq_clients(self):
+  def iter_midi_clients(self):
     client_re = re.compile('Client[ ]+(\d+) : "(.*)"')
     port_re = re.compile('  Port[ ]+(\d+) : "(.*)"')
     try:
