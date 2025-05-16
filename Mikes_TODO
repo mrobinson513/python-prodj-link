@@ -1,0 +1,25 @@
+# Todo list
+
+### This is a list of things I need to do
+
+* Orchestrate updating the amount of filter glitch
+  * updating filter settings:
+  ```python
+
+  ```
+  * getting current runtime of stream
+  ```python
+  while True:
+    rec = obs.call(actions.GetRecordStatus())
+    current_duration = rec.datain['outputDuration']
+    expected_duration = 7200000 # 7.2M milliseconds
+    pct_duration = current_duration / expected_duration * 100
+    obs.call(actions.SetSourceFilterSettings(
+      sourceName="Header",
+      filterName="Retro Effects",
+      filterSettings={
+        'digital_glitch_amount': pct_duration
+        }
+      )
+    )
+    time.sleep(60)
