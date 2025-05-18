@@ -35,7 +35,7 @@ def update(input_name="track_id"):
       try:
         artist = track_data['artist']
         title = track_data['title']
-        track_string = f"{artist} - {title}"
+        track_string = f"{artist}\n\n{title}"
         obs.call(actions.SetInputSettings(
           inputName=input_name,
           inputSettings={

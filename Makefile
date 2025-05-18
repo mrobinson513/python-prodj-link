@@ -1,8 +1,11 @@
 tempo:
-	python midiclock.py -d "Elektron Syntakt"
+	pyenv exec python midiclock.py -d "Elektron Digitakt"
 
 obs:
-	python update-obs-track_id.py &
+	pyenv exec python update-obs-track_id.py
 
 track:
-	python get-live-track-id.py
+	pyenv exec python get-live-track-id.py
+
+entropy:
+	pyenv exec python entropy.py

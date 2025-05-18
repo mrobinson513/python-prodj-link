@@ -13,7 +13,7 @@ logging.basicConfig(level=default_loglevel)
 # init vars
 ENDPOINT_HOST=os.getenv("ENDPOINT_URL", "localhost")
 ENDPOINT_PORT=os.getenv("ENDPOINT_PORT", "8080")
-MIDI_DEVICE_NAME=os.getenv("MIDI_DEVICE_NAME", "Elektron Syntakt")
+MIDI_DEVICE_NAME=os.getenv("MIDI_DEVICE_NAME", "Elektron Digitakt")
 
 which_os = os.uname().sysname
 
@@ -76,4 +76,3 @@ try:
 except KeyboardInterrupt:
   logging.info("Shutting down...")
   p.stop()
-
